@@ -3,35 +3,71 @@
     ViewData["Title"] = "Home Page";
 }
 
-<br/>
+<br />
 
 <div>
-
-    <table id="table" data-page-list="[5,10,20,50,100,All]" class="table">
+    <div id="toolbar" class="btn-group">
+        <button type="button" class="btn btn-default">
+            Add <i class="glyphicon glyphicon-plus"></i>
+        </button>
+    </div>
+    <table data-toggle="table"
+           data-url='x'
+           data-search="true"
+           data-show-refresh="true"
+           data-show-toggle="true"
+           data-toolbar="#toolbar">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Value</th>
-                <th>IsActive</th>
-                <th>ApplicationName</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Value</th>
+            <th>IsActive</th>
+            <th>ApplicationName</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Name</td>
-                    <td>@item.Type</td>
-                    <td>@item.Value</td>
-                    <td>@item.IsActive</td>
-                    <td>@item.ApplicationName</td>
-                </tr>
-            }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Type</td>
+                <td>@item.Value</td>
+                <td>@item.IsActive</td>
+                <td>@item.ApplicationName</td>
+                <td><button id="btn2" type="button" onclick="deleteItem('@item.Id');"  class="btn  btn-default">Delete <i class="glyphicon glyphicon-trash"></i></button></td>
+            </tr>
+        }
 
         </tbody>
     </table>
 
 </div>
+
+
+
+@section Scripts
+{
+    
+    <script src="~/lib/bootstrap-table/dist/bootstrap-table.js"></script>
+    <script>
+        function deleteItem(id){
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "api/Config/" + id,
+                "method": "DELETE"
+            }
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+            });
+        }
+
+    </script>
+
+
+}

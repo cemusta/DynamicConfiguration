@@ -21,8 +21,9 @@ namespace DynamicConfiguration.Web.LiveTest
             
             services.AddSingleton(Configuration);
 
+            var appName = Configuration["AppName"];
             var connectionString = Configuration["ConfigDb"];
-            services.AddSingleton<IConfigurationReader>(new ConfigurationReader("LiveTest", connectionString, 10000));
+            services.AddSingleton<IConfigurationReader>(new ConfigurationReader(appName, connectionString, 10000));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

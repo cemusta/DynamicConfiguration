@@ -10,17 +10,13 @@ namespace DynamicConfiguration.Data.Model
     {
         [BsonId]
         [BsonIgnoreIfDefault]
-        public ObjectId Id;
+        public ObjectId Id { get; set; }
 
-        public string Name;
-
-        public ConfigType Type;
-
-        public String Value;
-
-        public bool IsActive;
-
-        public string ApplicationName;
+        public string Name { get; set; }
+        public ConfigType Type { get; set; }
+        public String Value { get; set; }
+        public bool IsActive { get; set; }
+        public string ApplicationName { get; set; }
 
         public bool CheckType<T>()
         {
