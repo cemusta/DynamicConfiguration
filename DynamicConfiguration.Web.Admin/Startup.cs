@@ -1,4 +1,5 @@
 ﻿using DynamicConfiguration.Data.Helper;
+using DynamicConfiguration.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +26,9 @@ namespace DynamicConfiguration.Web.Admin
             services.AddMvc();
 
             services.AddSingleton<IConfiguration>(Configuration);
+
+            var connectionString = Configuration["ConfigDb"];
+            services.AddSingleton<IConfigurationRepository>(new ConfigurationRepository(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
