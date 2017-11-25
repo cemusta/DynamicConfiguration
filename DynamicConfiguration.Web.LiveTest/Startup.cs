@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using DynamicConfiguration.Data.Helper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,10 @@ namespace DynamicConfiguration.Web.LiveTest
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            var connStr = configuration["ConfigDb"];
+
+            DatabaseHelper.CreateDatabase(connStr); //create and init db. (with demo data)
         }
 
         public IConfiguration Configuration { get; }

@@ -15,7 +15,7 @@ namespace DynamicConfiguration.Web.Admin
 
             var connStr = configuration["ConfigDb"];
 
-            DatabaseHelper.CreateDatabase(connStr);
+            DatabaseHelper.CreateDatabase(connStr); //create and init db. (with demo data)
         }
 
         public IConfiguration Configuration { get; }
